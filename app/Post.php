@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'description',
         'user_id',
+        'img_name',
     ];
 
     public function user()
@@ -34,5 +35,10 @@ class Post extends Model
                 'onUpdate' => true
             ]
         ];
+    }
+
+    public function getHumanReadableDateAttribute()
+    {
+        return $this->created_at->format('l jS  F Y h:i:s A');
     }
 }

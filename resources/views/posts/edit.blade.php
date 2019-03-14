@@ -3,7 +3,7 @@
  @section('content')
  
  <div class="container">
-    <form action="{!!route('posts.update',['post'=>$post->id])!!}" method="POST">
+    <form action="{!!route('posts.update',['post'=>$post->id])!!}" method="POST" enctype="multipart/form-data">
  @method('PUT')
         @csrf
         <div class="form-group">
@@ -48,7 +48,14 @@
         </div>
             @endif
        </div>
-
+       <input type="file"  name = "image">
+       @if ($errors->has('image'))
+            <div class="alert alert-danger">
+            <ul>
+                    <li>{{$errors->first('image')}}</li>
+            </ul>
+        </div>
+            @endif
     <button type="submit" class="btn btn-primary">Update</button>
     <a href="{{route('posts.index')}}" class="btn btn-danger">Back</a>
     </form>

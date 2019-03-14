@@ -2,7 +2,7 @@
 
  @section('content')
  <div class="container">
-    <form action="{{route('posts.store')}}" method="POST">
+    <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="exampleInputEmail1">Title</label>
@@ -42,7 +42,14 @@
         </div>
             @endif
         </div>
-
+        <input type="file"  name = "image">
+        @if ($errors->has('image'))
+            <div class="alert alert-danger">
+            <ul>
+                    <li>{{$errors->first('image')}}</li>
+            </ul>
+        </div>
+            @endif
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="{{route('posts.index')}}" class="btn btn-danger">Back</a>
     </form>

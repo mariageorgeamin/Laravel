@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 
@@ -27,25 +28,23 @@ class PostsController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        Post::create($request->all());
-
+        $path = Storage::putFile('posts', $request->file('image'));
+        Post::create($request->only(['title' , 'description' , 'user_id']) +  ["img_name" => $path]);
         return redirect()->route('posts.index');
     }
 
     public function edit(Post $post)
     {
-        // $post = Post::where('id',$post)->get()->first();
-        // select * from posts where id=1 limit 1;
-        // $post = Post::where('id',$post)->first();
-        // $post = Post::find($post);
         return view('posts.edit', [
             'post' => $post,
             'users' => User::all(),
         ]);
     }
 
-    public function update(UpdatePostRequest $request,$post){
-        Post::find($post)->update($request->all());
+    public function update(UpdatePostRequest $request,Post $post){
+        $path = Storage::putFile('posts', $request->file('image'));
+        Post::find($post->id)->update($request->only(['title' , 'description' , 'user_id']) + ["img_name" => $path]);
+        Storage::delete($post->img_name);
         return redirect()->route('posts.index');
 
     }
@@ -57,9 +56,10 @@ class PostsController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $res=Post::where('id',$id)->delete();
+        $res=Post::where('id',$post->id)->delete();
+        Storage::delete($post->img_name);
         return redirect()->route('posts.index');
     }
 }
