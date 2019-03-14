@@ -34,6 +34,13 @@
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
+            @if ($errors->has('user_id'))
+            <div class="alert alert-danger">
+            <ul>
+                    <li>{{$errors->first('user_id')}}</li>
+            </ul>
+        </div>
+            @endif
         </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

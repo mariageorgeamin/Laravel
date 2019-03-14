@@ -1,6 +1,7 @@
  @extends('layouts.app')
 
  @section('content')
+ 
  <div class="container">
     <form action="{!!route('posts.update',['post'=>$post->id])!!}" method="POST">
  @method('PUT')
@@ -39,6 +40,13 @@
                 @endif
                @endforeach
            </select>
+           @if ($errors->has('user_id'))
+            <div class="alert alert-danger">
+            <ul>
+                    <li>{{$errors->first('user_id')}}</li>
+            </ul>
+        </div>
+            @endif
        </div>
 
     <button type="submit" class="btn btn-primary">Update</button>
