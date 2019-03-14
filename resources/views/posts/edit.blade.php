@@ -13,6 +13,19 @@
             <textarea name="description" class="form-control">{{$post->description}}</textarea>
         </div>
 
+        <div class="form-group">
+           <label for="exampleInputPassword1">Post Creator</label>
+           <select class="form-control" name="user_id">
+               @foreach($users as $user)
+                @if($user->id == $post->user_id)
+                   <option value="{{$user->id}}" selected>{{$user->name}}</option>
+                @else
+                   <option value="{{$user->id}}" >{{$user->name}}</option>
+                @endif
+               @endforeach
+           </select>
+       </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="{{route('posts.index')}}" class="btn btn-danger">Back</a>
     </form>
