@@ -1,6 +1,7 @@
  @extends('layouts.app')
 
  @section('content')
+ <div class="container">
     <form action="{!!route('posts.update',['post'=>$post->id])!!}" method="POST">
  @method('PUT')
         @csrf
@@ -43,5 +44,6 @@
     <button type="submit" class="btn btn-primary">Update</button>
     <a href="{{route('posts.index')}}" class="btn btn-danger">Back</a>
     </form>
+    </div>
 @endsection
  
