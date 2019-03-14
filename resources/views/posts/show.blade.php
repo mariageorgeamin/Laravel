@@ -15,7 +15,7 @@
   <div class="card-body">
     <h5 class="card-title">Name:-{{ isset($post->user) ? $post->user->name : 'Not Found'}}</h5>
     <p class="card-text">Email:- {{ isset($post->user) ? $post->user->email : 'Not Found'}}</p>
-    <p class="card-text">Created at:- {{$post->created_at->format('l jS \of F Y h:i:s A')}}</p>
+    <p class="card-text">Created at:- {{$post->human_readable_date}}</p>
     <a href="{{route('posts.index')}}" class="btn btn-primary">Back</a>
   </div>
 </div>
