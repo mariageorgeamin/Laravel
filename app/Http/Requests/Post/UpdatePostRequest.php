@@ -25,10 +25,10 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required|min:3|unique:posts,title,'.$this->post,
+            'title' => 'required|min:3|unique:posts,title,'.$this->post->id,
             'description' => 'required|min:10',
             'user_id' => 'exists:posts,user_id',
-            'image' => 'required',
+            'image' => 'required|mimes:jpg,png',
 
         ];
     }

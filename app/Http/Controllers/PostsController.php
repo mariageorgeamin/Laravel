@@ -28,7 +28,7 @@ class PostsController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $path = Storage::putFile('posts', $request->file('image'));
+        $path = Storage::putFile('public', $request->file('image'));
         Post::create($request->only(['title' , 'description' , 'user_id']) +  ["img_name" => $path]);
         return redirect()->route('posts.index');
     }
@@ -41,9 +41,9 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update(UpdatePostRequest $request,Post $post){
-        $path = Storage::putFile('posts', $request->file('image'));
-        Post::find($post->id)->update($request->only(['title' , 'description' , 'user_id']) + ["img_name" => $path]);
+    public function update(UpdatePostRequest $request, Post $post){
+        $path = Storage::putFile('public', $request->file('image'));
+        Post::find($post->id)->update($request->only(['title' , 'description' , 'user_id']) +  ["img_name" => $path]);
         Storage::delete($post->img_name);
         return redirect()->route('posts.index');
 

@@ -8,7 +8,7 @@
   <div class="card-body">
     <h5 class="card-title">Title:- {{$post->title}}</h5>
     <p class="card-text">Description:- {{$post->description}}</p>
-    <div class="panel-body">Image: <img src = "{{Storage::url($post->img_name)}}"></div>
+    <div class="panel-body">Image: <img src = "{{Storage::url($post->img_name)}}" width="100" height="100"></div>
   </div>
 </div>
 <div class="card">
