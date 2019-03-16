@@ -26,3 +26,5 @@ Route::put('/posts/{post}','PostsController@update')->name('posts.update');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
